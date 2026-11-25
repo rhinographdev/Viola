@@ -1,0 +1,204 @@
+.footer {
+  position: relative;
+  min-height: calc(616 * var(--dp));
+  padding: 0 40px;
+  overflow: hidden;
+  isolation: isolate;
+  color: var(--c-text-strong);
+}
+.footer__bg {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+.footer__bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 70%;
+  opacity: 0.8;
+}
+.footer__bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, 0.55) 35%, rgba(255, 255, 255, 0) 100%);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+.footer__wordmark {
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  bottom: calc(-6 * var(--dp));
+  width: calc(100% - 80px);
+  height: auto;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+.js-motion .footer__wordmark[data-reveal],
+.js-motion .footer__wordmark[data-reveal].is-in {
+  transform: translateX(-50%);
+  animation-name: reveal-fade;
+}
+
+.footer__inner {
+  min-height: inherit;
+  display: flex;
+  flex-direction: column;
+}
+.footer__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px calc(100 * var(--dp) - 40px) 16px;
+  padding-left: max(0px, calc(60 * var(--dp) - 40px) + 20px);
+}
+.footer__logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  font-size: 20px;
+  letter-spacing: -0.04em;
+  min-height: 44px;
+}
+.footer__totop {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: -0.04em;
+  min-height: 44px;
+}
+.footer__totop svg {
+  transition: transform var(--t-micro) var(--ease-out);
+}
+.footer__totop:hover svg {
+  transform: translateY(-3px);
+}
+.footer__rule {
+  border: 0;
+  border-top: 1px solid rgba(11, 11, 15, 0.08);
+  margin: 0;
+}
+.footer__mid {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 40px 0 20px;
+}
+.footer__tagline {
+  max-width: 427px;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.02em;
+  color: var(--c-muted);
+}
+.footer address {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+}
+.footer address span {
+  color: var(--c-muted);
+}
+.footer__cols {
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  width: 316px;
+}
+.footer__cols > div {
+  width: 94px;
+}
+.footer__cols h2 {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.04em;
+  white-space: nowrap;
+}
+.footer__cols ul,
+.footer__bottom ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.footer__cols ul {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+}
+.footer__cols a {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  color: var(--c-muted);
+  transition: color var(--t-micro) var(--ease-out);
+}
+.footer__cols a:hover {
+  color: var(--c-text-strong);
+}
+.footer__bottom {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 0;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.04em;
+  color: var(--c-text);
+}
+.footer__bottom ul {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  width: 316px;
+}
+.footer__bottom a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 760px) {
+  .footer {
+    padding: 0 var(--page-pad);
+    min-height: 0;
+  }
+  .footer__top {
+    padding: 28px 0 12px;
+  }
+  .footer__mid {
+    flex-direction: column;
+    gap: 32px;
+    padding-bottom: 120px;
+  }
+  .footer__cols {
+    width: 100%;
+    max-width: 380px;
+  }
+  .footer__bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .footer__bottom ul {
+    width: auto;
+    flex-wrap: wrap;
+  }
+  .footer__wordmark {
+    width: calc(100% - 2 * var(--page-pad));
+    bottom: 70px;
+  }
+}

@@ -1,0 +1,147 @@
+.testi {
+  padding: calc(170 * var(--dp)) 0 calc(186 * var(--dp));
+  overflow: hidden;
+}
+.testi__title {
+  text-align: center;
+  line-height: 0.97;
+}
+
+.testi__viewport {
+  --cw: min(832px, calc(100vw - 2 * var(--page-pad)));
+  --gap: 16px;
+  position: relative;
+  height: calc(560 * var(--dp) + 0px);
+  min-height: 420px;
+  margin-top: calc(82 * var(--dp));
+  touch-action: pan-y;
+}
+.tcard {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: var(--cw);
+  height: 100%;
+  margin: 0 0 0 calc(var(--cw) / -2);
+  padding: clamp(80px, calc(101 * var(--dp)), 101px) 32px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: var(--radius-lg);
+  background: var(--c-tile);
+  transform: translate3d(calc(var(--rel) * (var(--cw) + var(--gap))), 0, 0);
+  transition:
+    transform var(--t-gallery) var(--ease-out),
+    background-color var(--t-gallery) var(--ease-out);
+  cursor: pointer;
+}
+.tcard[data-active='true'] {
+  background: var(--c-powder-soft);
+  cursor: default;
+}
+.tcard > * {
+  transition: opacity var(--t-gallery) var(--ease-out);
+}
+.tcard[data-active='false'] .tcard__avatar {
+  opacity: 0;
+}
+.tcard[data-active='false'] .tcard__quote,
+.tcard[data-active='false'] .tcard__who {
+  opacity: 0.85;
+}
+
+.tcard-nav {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  width: var(--cw);
+  margin-left: calc(var(--cw) / -2);
+  padding: 0 calc(20 * var(--dp) + 4px);
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+  z-index: 2;
+}
+.tcard-nav .round-nav {
+  pointer-events: auto;
+}
+
+.tcard__avatar {
+  width: clamp(120px, calc(128.9 * var(--dp) * 1.33), 172px);
+  aspect-ratio: 284.39 / 279.23;
+  -webkit-mask-image: var(--mask);
+  mask-image: var(--mask);
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  background: #94adad;
+  display: grid;
+  place-items: center;
+  flex: none;
+}
+.tcard__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 35%;
+  transform: scale(1.75);
+  transform-origin: 50% 40%;
+}
+.tcard__initials {
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-size: 40px;
+  color: var(--c-white);
+}
+.tcard__quote {
+  margin: clamp(28px, calc(49 * var(--dp)), 49px) 0 0;
+  max-width: 582px;
+  font-size: var(--fs-lead);
+  line-height: 1.22;
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: #000;
+}
+.tcard__who {
+  margin-top: clamp(28px, calc(54 * var(--dp)), 54px);
+  text-transform: capitalize;
+  text-align: center;
+}
+.tcard__name {
+  font-weight: 600;
+  font-size: var(--fs-card-name);
+  letter-spacing: -0.04em;
+  color: #000;
+}
+.tcard__role {
+  font-size: clamp(16px, 1.32vw, 20px);
+  letter-spacing: -0.03em;
+  color: var(--c-muted-2);
+  margin-left: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tcard,
+  .tcard > * {
+    transition-duration: 1ms;
+  }
+}
+@media (max-width: 700px) {
+  .testi {
+    padding: 72px 0;
+  }
+  .testi__viewport {
+    --cw: calc(100vw - 48px);
+    --gap: 12px;
+    height: auto;
+    min-height: 480px;
+    margin-top: 40px;
+  }
+  .tcard {
+    padding: 76px 22px 32px;
+  }
+  .tcard__who {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+}

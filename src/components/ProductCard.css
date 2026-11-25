@@ -1,0 +1,126 @@
+.pcard {
+  position: relative;
+  min-width: 0;
+}
+.pcard__link {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border-radius: var(--radius-sm);
+}
+.pcard__frame {
+  position: relative;
+  /* Fixed box: height comes from design px so the stagger is preserved. */
+  height: calc(var(--ih, 395) * var(--dp));
+  min-height: 180px;
+  border-radius: var(--radius-sm);
+  background: var(--c-tile);
+  overflow: hidden;
+}
+
+/* ---------- media & swap ---------- */
+.pmedia {
+  position: absolute;
+  inset: 0;
+}
+.pmedia__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transition:
+    opacity var(--t-image) var(--ease-std),
+    transform var(--t-image) var(--ease-out);
+}
+/* Model shots stand on the bottom edge like the reference. */
+.pmedia__img--model {
+  object-fit: contain;
+  object-position: 50% 100%;
+  padding-top: 12%;
+}
+/* Product-only shots: centered, consistent scale, soft neutral ground. */
+.pmedia__img--product {
+  object-fit: contain;
+  object-position: 50% 55%;
+  padding: 8% 6%;
+}
+.pmedia__alt {
+  position: absolute;
+  inset: 0;
+  background: #eeeae7;
+  opacity: 0;
+  transition: opacity var(--t-image) var(--ease-std);
+}
+.pmedia__alt .pmedia__img {
+  transform: scale(1.015);
+}
+
+.pmedia[data-swap='ready'][data-show-product='true'] .pmedia__alt,
+.pcard:hover .pmedia[data-swap='ready'] .pmedia__alt,
+.pcard__link:focus-visible .pmedia[data-swap='ready'] .pmedia__alt {
+  opacity: 1;
+}
+.pmedia[data-swap='ready'][data-show-product='true'] .pmedia__alt .pmedia__img,
+.pcard:hover .pmedia[data-swap='ready'] .pmedia__alt .pmedia__img,
+.pcard__link:focus-visible .pmedia[data-swap='ready'] .pmedia__alt .pmedia__img {
+  transform: scale(1);
+}
+
+/* Touch-only view toggle */
+.pcard__toggle {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: none;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--c-text);
+  font-size: 12px;
+  font-weight: 500;
+  box-shadow: 0 2px 10px rgba(19, 19, 19, 0.1);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+.pcard__toggle[aria-pressed='true'] {
+  background: var(--c-text);
+  color: var(--c-white);
+}
+@media (hover: none) {
+  .pcard__toggle {
+    display: inline-flex;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pmedia__img,
+  .pmedia__alt {
+    transition-duration: 1ms;
+  }
+  .pmedia__alt .pmedia__img {
+    transform: none;
+  }
+}
+
+/* Figma-matched image boxes (used by the signature row) */
+.pmedia__box {
+  position: absolute;
+  overflow: hidden;
+}
+.pmedia__img--cover {
+  object-fit: cover;
+  object-position: 50% 0%;
+}
+.pmedia__img--crop {
+  inset: auto;
+  max-width: none;
+  object-fit: fill;
+}
+
+.pmedia__alt .pmedia__img--product {
+  padding: 4% 2%;
+  object-position: 50% 50%;
+}

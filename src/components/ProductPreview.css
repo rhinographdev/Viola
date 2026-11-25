@@ -1,0 +1,113 @@
+.ppreview {
+  width: min(760px, calc(100vw - 32px));
+  max-height: calc(100dvh - 32px);
+  padding: 0;
+  border: 0;
+  border-radius: 24px;
+  background: var(--c-white);
+  color: var(--c-text);
+  box-shadow: 0 30px 80px rgba(19, 19, 19, 0.22);
+  overflow: auto;
+}
+.ppreview::backdrop {
+  background: rgba(30, 44, 56, 0.35);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .ppreview[open] {
+    animation: ppreview-in 360ms var(--ease-out);
+  }
+  .ppreview[open]::backdrop {
+    animation: ppreview-fade 360ms var(--ease-out);
+  }
+}
+@keyframes ppreview-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.985);
+  }
+}
+@keyframes ppreview-fade {
+  from {
+    opacity: 0;
+  }
+}
+.ppreview__body {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.ppreview__media {
+  background: var(--c-tile-2);
+  aspect-ratio: 1;
+}
+.ppreview__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 8%;
+}
+.ppreview__info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 40px 32px 32px;
+}
+.ppreview__eyebrow {
+  font-size: 13px;
+  color: var(--c-muted);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+.ppreview__title {
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+}
+.ppreview__price {
+  font-weight: 500;
+  font-size: 18px;
+}
+.ppreview__desc {
+  color: var(--c-muted);
+  line-height: 1.5;
+}
+.ppreview__color {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+.ppreview__info .pill {
+  background: var(--c-text);
+  color: var(--c-white);
+}
+.ppreview__close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--c-white);
+  box-shadow: 0 2px 10px rgba(19, 19, 19, 0.1);
+}
+@media (max-width: 640px) {
+  .ppreview__body {
+    grid-template-columns: 1fr;
+  }
+  .ppreview__media {
+    aspect-ratio: 4 / 3;
+  }
+  .ppreview__info {
+    padding: 24px;
+  }
+}

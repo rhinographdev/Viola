@@ -1,0 +1,119 @@
+.split-heading {
+  font-family: var(--f-sans);
+  font-weight: 500;
+  font-size: var(--fs-h2);
+  line-height: 1.11;
+  letter-spacing: -0.04em;
+  color: var(--c-ink);
+  text-transform: capitalize;
+}
+.split-heading .serif {
+  letter-spacing: -0.04em;
+}
+
+.lead {
+  font-size: var(--fs-lead);
+  line-height: 1.22;
+  color: var(--c-text);
+  text-wrap: pretty;
+}
+
+/* Pill CTA: white pill with peach arrow chip */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  padding: 6px 6px 6px 24px;
+  background: var(--c-white);
+  color: #000;
+  border-radius: 50px;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.02em;
+  transition: box-shadow var(--t-micro) var(--ease-out), transform var(--t-micro) var(--ease-out);
+}
+.pill__chip {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--c-peach);
+  color: var(--c-text);
+  transition: transform var(--t-micro) var(--ease-out);
+}
+.pill:hover {
+  box-shadow: 0 6px 20px rgba(19, 19, 19, 0.1);
+}
+.pill:hover .pill__chip {
+  transform: translate(2px, -2px) rotate(0deg);
+}
+
+/* Round carousel buttons (48px) */
+.round-nav {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  flex: none;
+  background: var(--c-text);
+  color: var(--c-white);
+  transition: background-color var(--t-micro) var(--ease-out), color var(--t-micro) var(--ease-out),
+    transform var(--t-micro) var(--ease-out);
+}
+.round-nav--prev {
+  background: var(--c-btn-muted);
+  color: var(--c-text);
+}
+.round-nav:hover:not(:disabled) {
+  transform: scale(1.05);
+}
+.round-nav--prev:hover:not(:disabled) {
+  background: #cfcdcd;
+}
+.round-nav:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.round-nav--light {
+  width: 40px;
+  height: 40px;
+  background: var(--c-white);
+  color: var(--c-text);
+}
+
+.swatch {
+  display: block;
+  flex: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 1px rgba(19, 19, 19, 0.06);
+}
+
+/* Product name + price label used under images */
+.p-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  color: var(--c-text);
+}
+.p-label__name {
+  font-weight: 500;
+  font-size: var(--fs-card-name);
+  letter-spacing: -0.04em;
+  line-height: 1.2;
+}
+.p-label__price {
+  display: block;
+  margin-top: 5px;
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: -0.04em;
+}
+span.p-label__name {
+  display: block;
+}

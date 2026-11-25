@@ -1,0 +1,49 @@
+/* Design tokens extracted from the Figma file (Fashion E-commerce Concept, node 3129:5041). */
+:root {
+  /* Color */
+  --c-ink: #131313;
+  --c-text: #231f20;
+  --c-text-strong: #0b0b0f;
+  --c-muted: #515666;
+  --c-muted-2: rgba(0, 0, 0, 0.32);
+  --c-white: #ffffff;
+  --c-powder: #bdd8eb;
+  --c-powder-soft: rgba(189, 216, 235, 0.33);
+  --c-cream: #fae4cc;
+  --c-peach: #f7d4af;
+  --c-tile: #f7f7f7;
+  --c-tile-2: #f1f1f1;
+  --c-btn-muted: #dcdbdb;
+  --c-line: rgba(19, 19, 19, 0.16);
+  --c-focus: #1f5f99;
+
+  /* Type */
+  --f-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --f-serif: 'Playfair Display', 'Times New Roman', serif;
+
+  /* 1 design px at the 1512px reference width, never larger than 1px. */
+  --dp: min(1px, calc(100vw / 1512));
+
+  --fs-hero: clamp(2.75rem, 5.3vw, 5rem);           /* 80 */
+  --fs-h2: clamp(2.5rem, 4.76vw, 4.5rem);            /* 72 */
+  --fs-display: clamp(3rem, 8.14vw, 7.6875rem);      /* 123 */
+  --fs-acc-title: clamp(1.75rem, 3.7vw, 3.5rem);     /* 56 */
+  --fs-acc-num: clamp(1.5rem, 3.17vw, 3rem);         /* 48 */
+  --fs-caption-serif: clamp(1.75rem, 2.9vw, 2.736rem); /* 43.77 */
+  --fs-lead: clamp(1.0625rem, 1.59vw, 1.5rem);       /* 24 */
+  --fs-card-name: clamp(1.0625rem, 1.59vw, 1.5rem);  /* 24 */
+
+  --page-pad: clamp(16px, 1.6vw, 24px);
+  --radius-sm: 16px;
+  --radius-lg: 32px;
+
+  /* Motion system */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-std: cubic-bezier(0.4, 0, 0.2, 1);
+  --t-micro: 220ms;
+  --t-image: 400ms;
+  --t-accordion: 360ms;
+  --t-gallery: 580ms;
+  --t-enter: 720ms;
+  --stagger: 80ms;
+}

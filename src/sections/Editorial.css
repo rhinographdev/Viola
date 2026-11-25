@@ -1,0 +1,207 @@
+.editorial {
+  position: relative;
+  /* Scroll runway: one viewport + ~65vh per slide. */
+  height: calc(100svh + var(--slides, 5) * 65svh);
+  overflow-x: clip;
+}
+.editorial__sticky {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+.editorial__dots {
+  left: -30%;
+  top: 10%;
+  width: 72%;
+  aspect-ratio: 1;
+}
+.editorial__controls {
+  margin: 0 auto clamp(28px, 6svh, 70px);
+}
+.editorial__caption {
+  display: inline-block;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .editorial__caption {
+    animation: ed-cap 900ms var(--ease-out);
+  }
+}
+@keyframes ed-cap {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+.editorial__stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+.editorial__frame {
+  position: relative;
+  width: min(515px, calc(515 * var(--dp)), calc((100svh - 250px) * 0.8666));
+  aspect-ratio: 515.2 / 594.53;
+  overflow: hidden;
+  -webkit-mask-image: var(--mask);
+  mask-image: var(--mask);
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  background: #6aa6dc;
+  touch-action: pan-y;
+  user-select: none;
+  --drift: 0;
+}
+.editorial__frame:focus-visible {
+  outline: none;
+}
+.editorial__frame:focus-visible::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 0 3px var(--c-focus);
+}
+
+/* Slides: very soft crossfade with a slow zoom settle. */
+.eslide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1600ms cubic-bezier(0.45, 0, 0.25, 1);
+}
+.eslide[data-active='true'] {
+  opacity: 1;
+  z-index: 1;
+}
+.eslide__img {
+  position: absolute;
+  left: 0;
+  top: -6%;
+  width: 100%;
+  height: 112%;
+  max-width: none;
+  object-fit: cover;
+  transform: translate3d(0, calc(var(--drift) * 1px), 0) scale(1.06);
+  transition: transform 2600ms var(--ease-out);
+  will-change: transform, opacity;
+}
+.eslide__img--crop {
+  object-fit: fill;
+}
+.eslide[data-active='true'] .eslide__img {
+  transform: translate3d(0, calc(var(--drift) * 1px), 0) scale(1);
+}
+
+.editorial__type {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  pointer-events: none;
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: var(--fs-display);
+  letter-spacing: 0.02em;
+  line-height: 1.3;
+  color: #000;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+.editorial__word--left {
+  margin-left: calc(-1 * var(--dp));
+}
+.editorial__word--right {
+  margin-right: calc(22 * var(--dp));
+}
+
+.editorial__pager {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  margin-top: 28px;
+}
+.editorial__dot {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+}
+.editorial__dot span {
+  position: relative;
+  display: block;
+  width: 22px;
+  height: 3px;
+  border-radius: 3px;
+  background: rgba(19, 19, 19, 0.15);
+  overflow: hidden;
+}
+.editorial__dot span::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--c-text);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+.editorial__dot span::after {
+  transition: transform 500ms var(--ease-out);
+}
+.editorial__dot[aria-current='true'] span::after {
+  transform: scaleX(1);
+}
+.editorial__pause {
+  margin-left: 8px;
+  min-height: 36px;
+  padding: 0 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  color: var(--c-muted);
+}
+.editorial__pause:hover {
+  color: var(--c-text);
+  background: var(--c-tile);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eslide,
+  .eslide__img {
+    transition-duration: 1ms;
+  }
+}
+
+@media (max-width: 760px) {
+  .editorial__controls {
+    margin-bottom: 72px;
+  }
+  .editorial__frame {
+    width: min(68vw, 340px, calc((100svh - 330px) * 0.8666));
+  }
+  .editorial__type {
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    padding: 0 var(--page-pad);
+    font-size: clamp(2.75rem, 13vw, 4.5rem);
+    inset: -1.05em 0;
+  }
+  .editorial__word--left {
+    text-align: left;
+    margin: 0;
+  }
+  .editorial__word--right {
+    text-align: right;
+    margin: 0;
+  }
+  .editorial__pager {
+    margin-top: 72px;
+  }
+}

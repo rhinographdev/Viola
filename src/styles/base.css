@@ -1,0 +1,181 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+  overflow-x: clip;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--f-sans);
+  color: var(--c-text);
+  background: var(--c-white);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+img,
+video,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+:focus-visible {
+  outline: 2px solid var(--c-focus);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.serif {
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-weight: 400;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -60px;
+  z-index: 100;
+  background: var(--c-white);
+  color: var(--c-ink);
+  padding: 10px 16px;
+  border-radius: 999px;
+  transition: top var(--t-micro) var(--ease-out);
+}
+.skip-link:focus {
+  top: 12px;
+}
+
+/* Halftone dot pattern used as a soft texture behind several sections. */
+.dots {
+  position: absolute;
+  pointer-events: none;
+  background-image: radial-gradient(circle, rgba(19, 19, 19, 0.09) 2.2px, transparent 2.8px);
+  background-size: 14px 14px;
+  -webkit-mask-image: radial-gradient(closest-side, #000 15%, transparent 100%);
+  mask-image: radial-gradient(closest-side, #000 15%, transparent 100%);
+}
+.dots--light {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.55) 2.2px, transparent 2.8px);
+}
+
+/* ---------- Reveal system ----------
+   Hidden states only apply when JS has opted in (html.js-motion) and the user
+   allows motion, so content stays readable if scripts or animation fail. */
+@media (prefers-reduced-motion: no-preference) {
+  .js-motion [data-reveal] {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+  }
+  .js-motion [data-reveal='fade'] {
+    transform: none;
+  }
+  .js-motion [data-reveal='scale'] {
+    transform: scale(0.97);
+  }
+  .js-motion [data-reveal='rise'] {
+    transform: translate3d(0, 44px, 0);
+  }
+  /* Keyframe animation (fill: backwards) rather than a transition, so hover
+     transitions on the same elements keep their own micro-interaction timing. */
+  .js-motion [data-reveal].is-in {
+    opacity: 1;
+    transform: none;
+    animation: reveal-rise var(--t-enter) var(--ease-out) var(--d, 0ms) backwards;
+  }
+  .js-motion [data-reveal='fade'].is-in {
+    animation-name: reveal-fade;
+  }
+  .js-motion [data-reveal='scale'].is-in {
+    animation-name: reveal-scale;
+  }
+  /* Stronger, slower rise used for the "Find your signature style" section. */
+  .js-motion [data-reveal='rise'].is-in {
+    animation-name: reveal-rise-lg;
+    animation-duration: 900ms;
+  }
+}
+@keyframes reveal-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+  }
+}
+@keyframes reveal-rise-lg {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 44px, 0);
+  }
+}
+@keyframes reveal-fade {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes reveal-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

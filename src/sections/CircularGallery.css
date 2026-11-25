@@ -1,0 +1,172 @@
+.gallery {
+  position: relative;
+  padding: calc(160 * var(--dp)) 0 calc(180 * var(--dp));
+  overflow: hidden;
+}
+.gallery__stage {
+  --size: clamp(220px, calc(422 * var(--dp)), 422px);
+  position: relative;
+  height: calc(var(--size) + 60px);
+  margin: 0 auto;
+  touch-action: pan-y;
+  user-select: none;
+  border-radius: 24px;
+}
+.gslide {
+  --x: 0;
+  --s: 1;
+  --o: 1;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: var(--size);
+  height: var(--size);
+  margin-left: calc(var(--size) / -2);
+  z-index: calc(10 - var(--abs));
+  transform: translate3d(calc(var(--x) * var(--size) / 422), 0, 0) scale(var(--s));
+  opacity: var(--o);
+  transition:
+    transform var(--t-gallery) var(--ease-out),
+    opacity var(--t-gallery) var(--ease-out),
+    filter var(--t-gallery) var(--ease-out);
+  cursor: pointer;
+}
+.gslide[data-active='true'] {
+  cursor: default;
+}
+.gslide[data-offset='-1'] { --x: -270; --s: 0.846; }
+.gslide[data-offset='1'] { --x: 270; --s: 0.846; }
+.gslide[data-offset='-2'] { --x: -445; --s: 0.62; --o: 0.55; filter: grayscale(1) brightness(1.15); }
+.gslide[data-offset='2'] { --x: 445; --s: 0.62; --o: 0.55; filter: grayscale(1) brightness(1.15); }
+
+.gslide__disc {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #8fb6dc;
+}
+.gslide__disc img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 30%;
+}
+.gslide__ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 calc(14px * var(--size) / 422px * 1) rgba(255, 255, 255, 0.12);
+  opacity: 0;
+  transition: opacity var(--t-gallery) var(--ease-out);
+}
+.gslide__veil {
+  position: absolute;
+  left: -4%;
+  right: -4%;
+  bottom: 0;
+  height: 46%;
+  background: linear-gradient(180deg, rgba(31, 41, 55, 0) 0%, rgba(31, 41, 55, 0.14) 100%);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 60%);
+  mask-image: linear-gradient(180deg, transparent, #000 60%);
+  opacity: 0;
+  transition: opacity var(--t-gallery) var(--ease-out);
+}
+.gslide__title {
+  position: absolute;
+  left: 18%;
+  right: 18%;
+  top: 70%;
+  transform: translateY(-50%) translateY(8px);
+  text-align: center;
+  color: var(--c-white);
+  font-size: calc(var(--size) * 0.1037);
+  line-height: 0.94;
+  letter-spacing: -0.04em;
+  text-transform: capitalize;
+  text-shadow: 0 1px 14px rgba(20, 30, 40, 0.25);
+  opacity: 0;
+  transition: opacity var(--t-gallery) var(--ease-out), transform var(--t-gallery) var(--ease-out);
+}
+.gslide[data-active='true'] .gslide__ring,
+.gslide[data-active='true'] .gslide__veil {
+  opacity: 1;
+}
+.gslide[data-active='true'] .gslide__title {
+  opacity: 1;
+  transform: translateY(-50%);
+  transition-delay: 120ms;
+}
+.gslide__glow {
+  position: absolute;
+  inset: 12% 8% -10%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(150, 190, 235, 0.55), rgba(240, 200, 190, 0.25) 60%, transparent);
+  filter: blur(30px);
+  opacity: 0;
+  transition: opacity var(--t-gallery) var(--ease-out);
+}
+.gslide[data-active='true'] .gslide__glow {
+  opacity: 1;
+}
+
+.gallery__controls {
+  margin-top: calc(50 * var(--dp));
+}
+.gallery__caption {
+  min-height: 2.9em;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .gallery__caption-in {
+    display: inline-block;
+    animation: cap-in 420ms var(--ease-out);
+  }
+}
+@keyframes cap-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+.gallery__dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+.gallery__dots span {
+  width: 6px;
+  height: 6px;
+  border-radius: 6px;
+  background: rgba(19, 19, 19, 0.2);
+  transition: width var(--t-micro) var(--ease-out), background-color var(--t-micro) var(--ease-out);
+}
+.gallery__dots span[data-on='true'] {
+  width: 22px;
+  background: var(--c-text);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gslide,
+  .gslide__title,
+  .gslide__veil,
+  .gslide__ring,
+  .gslide__glow {
+    transition-duration: 1ms;
+  }
+}
+
+@media (max-width: 700px) {
+  .gallery {
+    padding: 56px 0 72px;
+  }
+  .gallery__stage {
+    --size: min(64vw, 300px);
+  }
+  .gslide[data-offset='-1'] { --x: -300; --s: 0.74; }
+  .gslide[data-offset='1'] { --x: 300; --s: 0.74; }
+  .gslide[data-offset='-2'],
+  .gslide[data-offset='2'] { --o: 0; }
+}

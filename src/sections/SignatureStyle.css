@@ -1,0 +1,113 @@
+.signature {
+  position: relative;
+  overflow-x: clip;
+  padding: calc(72 * var(--dp)) 0 calc(150 * var(--dp));
+  margin-top: -1px;
+}
+.signature__head {
+  display: grid;
+  grid-template-columns: minmax(0, 592px) minmax(0, 575px);
+  justify-content: space-between;
+  gap: 32px;
+  padding: 0 calc(28 * var(--dp) + 4px) 0 calc(28 * var(--dp));
+  padding-right: calc(170 * var(--dp));
+  position: relative;
+  z-index: 1;
+}
+.signature__title {
+  max-width: 600px;
+}
+.signature__lead {
+  padding-top: calc(28 * var(--dp));
+}
+
+/* Staggered row: widths and vertical offsets from the reference, scaled. */
+.signature__track {
+  display: flex;
+  align-items: flex-start;
+  gap: calc(15 * var(--dp));
+  padding: 0 calc(21 * var(--dp)) 8px;
+  margin-top: calc(100 * var(--dp));
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--page-pad);
+  scrollbar-width: none;
+  position: relative;
+  z-index: 1;
+}
+.signature__track::-webkit-scrollbar {
+  display: none;
+}
+.signature__item {
+  flex: 0 0 calc(var(--w) * var(--dp));
+  margin-top: calc(var(--o) * var(--dp));
+  scroll-snap-align: start;
+}
+
+.caption-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+  margin: calc(110 * var(--dp)) auto 0;
+  padding: 0 var(--page-pad);
+  position: relative;
+  z-index: 1;
+}
+.caption-row__text {
+  max-width: 575px;
+  text-align: center;
+  font-size: var(--fs-lead);
+  line-height: 1.46;
+  color: var(--c-text);
+}
+.caption-row[data-scrollable='false'] .round-nav {
+  visibility: hidden;
+}
+
+.signature__dots {
+  right: -8%;
+  bottom: -40%;
+  width: 72%;
+  aspect-ratio: 1;
+  z-index: 0;
+}
+
+@media (max-width: 1100px) {
+  .signature__head {
+    grid-template-columns: 1fr;
+    padding: 0 var(--page-pad);
+    gap: 16px;
+  }
+  .signature__lead {
+    padding-top: 0;
+    max-width: 575px;
+  }
+  .signature__track {
+    padding-inline: var(--page-pad);
+    gap: 14px;
+    margin-top: 48px;
+  }
+  /* Keep a gentle stagger but size for touch scrolling. */
+  .signature__item {
+    flex-basis: clamp(200px, 34vw, 300px);
+    margin-top: calc(var(--o) * 0.25px);
+  }
+  .signature__item .pcard__frame {
+    height: auto;
+    aspect-ratio: 3 / 4;
+  }
+  .caption-row {
+    margin-top: 40px;
+    gap: 20px;
+  }
+}
+@media (max-width: 560px) {
+  .signature__item {
+    flex-basis: 72vw;
+  }
+  .caption-row__text br {
+    display: none;
+  }
+}
